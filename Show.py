@@ -1,3 +1,4 @@
+# encoding: utf-8
 from bs4 import BeautifulSoup
 with open("data_center.html", "r+", encoding='utf-8') as html:
     html_1 = BeautifulSoup(html, 'lxml')

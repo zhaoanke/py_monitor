@@ -1,3 +1,4 @@
+# encoding: utf-8
 import pymysql
 from pyecharts.charts import Line
 from pyecharts import options as opts
