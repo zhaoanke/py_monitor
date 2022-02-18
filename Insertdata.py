@@ -21,8 +21,8 @@ def Get_sys_info():
     mem_used = round(mem.used / 1024 / 1024 / 1024)
 
     # 磁盘信息(磁盘空间使用占比)
-    disk1 = str(psutil.disk_usage('/root/').percent) + '%'
-    disk2 = str(psutil.disk_usage('/dev/shm/').percent) + '%'
+    disk1 = str(psutil.disk_usage('c:/').percent) + '%'
+    disk2 = str(psutil.disk_usage('d:/').percent) + '%'
   
 
     return mem_free,mem_total,mem_percent,mem_used,cpu,disk1,disk2
