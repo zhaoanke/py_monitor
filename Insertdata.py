@@ -5,7 +5,8 @@ import pymysql
 from datetime import datetime
 import schedule
 
-db = pymysql.connect(user="root", passwd="zak@123456", db="monitor", host="1.117.176.78")
+#db = pymysql.connect(user="root", passwd="zak@123456", db="monitor", host="1.117.176.78")
+db = pymysql.connect(user="root", passwd="zak@123456", db="scontrol", host="127.0.0.1")
 db.autocommit(True)
 cur = db.cursor()
 def Get_sys_info():
@@ -16,27 +17,27 @@ def Get_sys_info():
     # 内存信息
     mem = psutil.virtual_memory()
     mem_total = round(mem.total / 1024 / 1024 / 1024, 0)
-    mem_free = round(mem.free / 1024 / 1024 / 1024)
+    mem_free = round(mem.free / 1024 / 1024 / 1024, 2)
     mem_percent = str(mem.percent) + '%'
-    mem_used = round(mem.used / 1024 / 1024 / 1024)
+    mem_used = round(mem.used / 1024 / 1024 / 1024, 0)
 
     # 磁盘信息(磁盘空间使用占比)
-    disk1 = str(psutil.disk_usage('c:/').percent) + '%'
-    disk2 = str(psutil.disk_usage('d:/').percent) + '%'
+    disk1 = str(psutil.disk_usage('/root/').percent) + '%'
+    #disk2 = str(psutil.disk_usage('/dev/shm/').percent) + '%'
   
 
-    return mem_free,mem_total,mem_percent,mem_used,cpu,disk1,disk2
+    return mem_free,mem_total,mem_percent,mem_used,cpu,disk1
 
 if __name__ == "__main__":
 
     def job():
-        mem_free, mem_total, mem_percent, mem_used, cpu, disk1, disk2 = Get_sys_info()
+        mem_free, mem_total, mem_percent, mem_used, cpu, disk1= Get_sys_info()
         now_time = datetime.now()
-        list1 = [now_time, mem_free, mem_total, mem_percent, mem_used, cpu, disk1, disk2]
+        list1 = [now_time, mem_free, mem_total, mem_percent, mem_used, cpu, disk1]
         tuple_list = tuple([str(i) for i in list1])
         print(tuple_list)
 
-        sql = """insert into system_info(TIME,mem_free,mem_total,mem_percent,mem_used,cpu,disk1,disk2) value (%s,%s,%s,%s,%s,%s,%s,%s)"""
+        sql = """insert into system_info(TIME,mem_free,mem_total,mem_percent,mem_used,cpu,disk1) value (%s,%s,%s,%s,%s,%s,%s)"""
 
         cur.execute(sql, tuple_list)
 

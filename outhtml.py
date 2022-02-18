@@ -5,14 +5,15 @@ from pyecharts import options as opts
 from pyecharts.charts import Bar, Pie, Page
 from pyecharts.globals import ThemeType
 
-db = pymysql.connect(user="root", passwd="zak@123456", db="monitor", host="1.117.176.78")
+#db = pymysql.connect(user="root", passwd="zak@123456", db="monitor", host="1.117.176.78")
+db = pymysql.connect(user="root", passwd="zak@123456", db="scontrol", host="127.0.0.1")
 cur1 = db.cursor()
 cur2 = db.cursor()
 cur3 = db.cursor()
 
 SQL1="""SELECT TIME,cpu,mem_percent FROM system_info WHERE TIME > DATE_SUB(NOW(), INTERVAL 60 MINUTE)"""  #查询最近1h内数据展示
 
-SQL2 = 'select disk1,disk2 from system_info order by TIME desc limit 1'
+SQL2 = 'select disk1 from system_info order by TIME desc limit 1'
 
 SQL3 = 'select mem_free,mem_total,mem_percent,mem_used from system_info order by TIME desc limit 1'
 
@@ -87,7 +88,7 @@ def line1(all_time, all_mem_percent):
 def bar(disk_percent):
 
     bar =(Bar(init_opts=opts.InitOpts(theme=ThemeType.CHALK))  #在这里输入啊，设置绘图主题为CHALK
-        .add_xaxis(["C盘","D盘"])
+        .add_xaxis(["磁盘"])
         .add_yaxis("磁盘使用占比：%",disk_percent))
     bar.render()
     return bar

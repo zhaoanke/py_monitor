@@ -10,5 +10,5 @@
 
 ## 3、监控中心大屏制作
 
-![image-20220218160156835](https://cdn.jsdelivr.net/gh/zhaoanke/gallery/img/202202181601462.png)
+![image-20220218161528964](C:%5CUsers%5CEDY%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220218161528964.png)
 

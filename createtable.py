@@ -1,6 +1,6 @@
 
 import pymysql
-db = pymysql.connect(user="root", passwd="zak@123456", db="monitor", host="1.117.176.78")
+db = pymysql.connect(user="root", passwd="zak@123456", db="scontrol", host="127.0.0.1")
 cur = db.cursor()
  
 # from sqlalchemy import create_engine
@@ -18,8 +18,7 @@ sql="""CREATE TABLE IF NOT EXISTS system_info(
      mem_percent VARCHAR (100) NOT NULL COMMENT '内存百分比',
      mem_used VARCHAR (100) NOT NULL COMMENT '占用内存',
      cpu VARCHAR (100)  COMMENT 'CPU占比',
-     disk1 VARCHAR (100)  COMMENT 'C盘使用占比',
-     disk2 VARCHAR (100)  COMMENT 'D盘使用占比',
+     disk1 VARCHAR (100)  COMMENT '磁盘使用占比',
      primary key(ID)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8 COMMENT = '系统信息监控'
 """
